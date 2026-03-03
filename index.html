@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JAMELZ - Presentación</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1A2332;
+            color: #FFFFFF;
+            overflow-x: hidden;
+        }
+
+        /* Presentación de slides */
+        .presentation {
+            width: 100%;
+            height: 100vh;
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+        }
+
+        .slide {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            scroll-snap-align: start;
+            position: relative;
+            padding: 60px 20px;
+        }
+
+        /* Patrón de fondo */
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(90deg, rgba(45, 155, 155, 0.03) 0px, transparent 1px, transparent 50px, rgba(45, 155, 155, 0.03) 51px),
+                repeating-linear-gradient(0deg, rgba(45, 155, 155, 0.03) 0px, transparent 1px, transparent 50px, rgba(45, 155, 155, 0.03) 51px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* Slide 1: Portada */
+        .slide-hero {
+            background: linear-gradient(135deg, #1A2332 0%, #2D4356 50%, #1A2332 100%);
+            text-align: center;
+        }
+
+        .hero-logo {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #2D9B9B, #3B7D7D);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            margin: 0 auto 30px;
+            box-shadow: 0 20px 60px rgba(45, 155, 155, 0.4);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-title {
+            font-size: 5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #2D9B9B, #F4D6A8, #FF6B4A);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: #F4D6A8;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+
+        .hero-tagline {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+
+        .circuit-decoration {
+            width: 80%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #2D9B9B, #FF6B4A, transparent);
+            margin: 40px auto;
+        }
+
+        /* Slide 2: Quiénes Somos */
+        .slide-about {
+            background: linear-gradient(135deg, #2D4356 0%, #1A2332 100%);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 3rem;
+            color: #F4D6A8;
+            margin-bottom: 25px;
+        }
+
+        .about-text p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+        }
+
+        .about-visual {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .feature-box {
+            background: rgba(45, 155, 155, 0.1);
+            border: 1px solid rgba(45, 155, 155, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-10px);
+            border-color: rgba(45, 155, 155, 0.6);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-label {
+            color: #F4D6A8;
+            font-weight: 600;
+        }
+
+        /* Slide 3: Misión y Visión */
+        .slide-mission {
+            background: linear-gradient(135deg, #1A2332 0%, #2D4356 100%);
+        }
+
+        .mission-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .mission-card {
+            background: rgba(45, 155, 155, 0.08);
+            border: 2px solid rgba(45, 155, 155, 0.3);
+            border-radius: 25px;
+            padding: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mission-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #2D9B9B, #FF6B4A);
+        }
+
+        .mission-card h3 {
+            font-size: 2.5rem;
+            color: #FF6B4A;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .mission-card p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        /* Slide 4: Servicios */
+        .slide-services {
+            background: linear-gradient(135deg, #2D4356 0%, #1A2332 100%);
+        }
+
+        .services-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .services-header h2 {
+            font-size: 3.5rem;
+            color: #F4D6A8;
+            margin-bottom: 20px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .service-card {
+            background: rgba(45, 155, 155, 0.08);
+            border: 1px solid rgba(45, 155, 155, 0.2);
+            border-radius: 20px;
+            padding: 35px;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(45, 155, 155, 0.5);
+            box-shadow: 0 15px 40px rgba(45, 155, 155, 0.2);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #2D9B9B, #FF6B4A);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            margin-bottom: 20px;
+        }
+
+        .service-card h4 {
+            color: #F4D6A8;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        /* Slide 5: Valores */
+        .slide-values {
+            background: linear-gradient(135deg, #1A2332 0%, #2D4356 100%);
+        }
+
+        .values-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .values-header h2 {
+            font-size: 3.5rem;
+            color: #F4D6A8;
+            margin-bottom: 20px;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .value-item {
+            background: rgba(45, 155, 155, 0.08);
+            border: 1px solid rgba(45, 155, 155, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .value-item:hover {
+            background: rgba(45, 155, 155, 0.15);
+            border-color: #2D9B9B;
+        }
+
+        .value-emoji {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .value-name {
+            color: #F4D6A8;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .value-desc {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Slide 6: Contacto */
+        .slide-contact {
+            background: linear-gradient(135deg, #2D4356 0%, #1A2332 100%);
+        }
+
+        .contact-container {
+            text-align: center;
+        }
+
+        .contact-container h2 {
+            font-size: 3.5rem;
+            color: #F4D6A8;
+            margin-bottom: 30px;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin: 60px 0;
+        }
+
+        .contact-item {
+            background: rgba(45, 155, 155, 0.08);
+            border: 1px solid rgba(45, 155, 155, 0.3);
+            border-radius: 20px;
+            padding: 40px 30px;
+        }
+
+        .contact-item-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .contact-item h4 {
+            color: #F4D6A8;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .contact-item p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #FF6B4A, #E85D3F);
+            color: white;
+            padding: 18px 50px;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 74, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 107, 74, 0.5);
+        }
+
+        /* Indicador de slides */
+        .slide-indicator {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .indicator-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(45, 155, 155, 0.3);
+            border: 2px solid rgba(45, 155, 155, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator-dot.active {
+            background: #2D9B9B;
+            width: 14px;
+            height: 14px;
+            box-shadow: 0 0 15px rgba(45, 155, 155, 0.6);
+        }
+
+        /* Scroll hint */
+        .scroll-hint {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        .scroll-hint span {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        .scroll-hint div {
+            width: 30px;
+            height: 50px;
+            border: 2px solid rgba(45, 155, 155, 0.5);
+            border-radius: 20px;
+            margin: 10px auto 0;
+            position: relative;
+        }
+
+        .scroll-hint div::before {
+            content: '';
+            width: 4px;
+            height: 10px;
+            background: #2D9B9B;
+            border-radius: 2px;
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: scroll 2s infinite;
+        }
+
+        @keyframes scroll {
+            0% { top: 8px; opacity: 1; }
+            100% { top: 28px; opacity: 0; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 3rem; }
+            .about-grid, .mission-container { grid-template-columns: 1fr; }
+            .services-grid { grid-template-columns: 1fr; }
+            .values-grid { grid-template-columns: repeat(2, 1fr); }
+            .contact-info { grid-template-columns: 1fr; }
+            .slide-indicator { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <!-- Slide 1: Portada -->
+        <section class="slide slide-hero">
+            <div class="slide-content">
+                <div class="hero-logo">🦅</div>
+                <h1 class="hero-title">JAMELZ</h1>
+                <p class="hero-subtitle">Joint Architecture for Modern Engineering and Logical Zystems</p>
+                <div class="circuit-decoration"></div>
+                <p class="hero-tagline">
+                    Construyendo el futuro digital con la precisión de la ingeniería moderna 
+                    y la sabiduría de arquitecturas ancestrales
+                </p>
+            </div>
+            <div class="scroll-hint">
+                <span>Desliza para explorar</span>
+                <div></div>
+            </div>
+        </section>
+
+        <!-- Slide 2: Quiénes Somos -->
+        <section class="slide slide-about">
+            <div class="slide-content">
+                <div class="about-grid">
+                    <div class="about-text">
+                        <h2>¿Quiénes Somos?</h2>
+                        <p>
+                            JAMELZ es una empresa mexicana de desarrollo de software que fusiona 
+                            la innovación tecnológica con la precisión arquitectónica.
+                        </p>
+                        <p>
+                            Creamos soluciones digitales robustas y escalables, diseñadas con la 
+                            misma dedicación con la que se construían las grandes estructuras 
+                            de nuestras culturas ancestrales.
+                        </p>
+                        <p>
+                            Cada línea de código es una pieza fundamental de una arquitectura mayor, 
+                            cada sistema es un templo digital construido para perdurar.
+                        </p>
+                    </div>
+                    <div class="about-visual">
+                        <div class="feature-box">
+                            <div class="feature-icon">💻</div>
+                            <div class="feature-label">Desarrollo Web</div>
+                        </div>
+                        <div class="feature-box">
+                            <div class="feature-icon">📱</div>
+                            <div class="feature-label">Apps Móviles</div>
+                        </div>
+                        <div class="feature-box">
+                            <div class="feature-icon">🔧</div>
+                            <div class="feature-label">APIs & Backend</div>
+                        </div>
+                        <div class="feature-box">
+                            <div class="feature-icon">☁️</div>
+                            <div class="feature-label">Cloud Solutions</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 3: Misión y Visión -->
+        <section class="slide slide-mission">
+            <div class="slide-content">
+                <div class="mission-container">
+                    <div class="mission-card">
+                        <h3>🎯 Misión</h3>
+                        <p>
+                            Transformar ideas en soluciones digitales funcionales y elegantes, 
+                            aplicando principios de arquitectura de software sólida y diseño centrado 
+                            en el usuario. Construimos sistemas que no solo resuelven problemas, 
+                            sino que crean oportunidades de crecimiento para nuestros clientes.
+                        </p>
+                    </div>
+                    <div class="mission-card">
+                        <h3>🔭 Visión</h3>
+                        <p>
+                            Ser la empresa líder en desarrollo de software personalizado en México, 
+                            reconocida por la calidad arquitectónica de nuestras soluciones y por 
+                            fusionar innovación tecnológica con identidad cultural. Construir el 
+                            futuro digital con raíces en el presente.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4: Servicios -->
+        <section class="slide slide-services">
+            <div class="slide-content">
+                <div class="services-header">
+                    <h2>Nuestros Servicios</h2>
+                    <p style="color: rgba(255,255,255,0.7); font-size: 1.2rem;">
+                        Soluciones tecnológicas diseñadas para tu éxito
+                    </p>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">🌐</div>
+                        <h4>Desarrollo Web</h4>
+                        <p>Aplicaciones web modernas, responsivas y de alto rendimiento con las últimas tecnologías.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">📱</div>
+                        <h4>Apps Móviles</h4>
+                        <p>Desarrollo nativo e híbrido para iOS y Android con experiencias fluidas.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🔌</div>
+                        <h4>APIs & Integraciones</h4>
+                        <p>Backend robusto, APIs RESTful y microservicios escalables.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🎨</div>
+                        <h4>UI/UX Design</h4>
+                        <p>Diseño de interfaces intuitivas centradas en la experiencia del usuario.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">☁️</div>
+                        <h4>Cloud & DevOps</h4>
+                        <p>Despliegue en la nube, CI/CD y gestión de infraestructura.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🔐</div>
+                        <h4>Consultoría</h4>
+                        <p>Asesoría técnica, arquitectura de software y mejores prácticas.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Valores -->
+        <section class="slide slide-values">
+            <div class="slide-content">
+                <div class="values-header">
+                    <h2>Nuestros Valores</h2>
+                    <p style="color: rgba(255,255,255,0.7); font-size: 1.2rem;">
+                        Los pilares que sostienen nuestra arquitectura
+                    </p>
+                </div>
+                <div class="values-grid">
+                    <div class="value-item">
+                        <div class="value-emoji">🎯</div>
+                        <div class="value-name">Precisión</div>
+                        <p class="value-desc">Cada línea de código cuenta, cada decisión importa</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-emoji">🚀</div>
+                        <div class="value-name">Innovación</div>
+                        <p class="value-desc">Siempre explorando nuevas tecnologías y métodos</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-emoji">🤝</div>
+                        <div class="value-name">Colaboración</div>
+                        <p class="value-desc">Trabajamos contigo, no solo para ti</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-emoji">💎</div>
+                        <div class="value-name">Calidad</div>
+                        <p class="value-desc">Excelencia en cada entregable</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-emoji">🌱</div>
+                        <div class="value-name">Sostenibilidad</div>
+                        <p class="value-desc">Código limpio y mantenible que perdura</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-emoji">⚡</div>
+                        <div class="value-name">Agilidad</div>
+                        <p class="value-desc">Adaptación rápida a cambios y necesidades</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-emoji">🛡️</div>
+                        <div class="value-name">Seguridad</div>
+                        <p class="value-desc">Protección de datos en primer lugar</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-emoji">🇲🇽</div>
+                        <div class="value-name">Identidad</div>
+                        <p class="value-desc">Orgullo mexicano en cada proyecto</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: Contacto -->
+        <section class="slide slide-contact">
+            <div class="slide-content">
+                <div class="contact-container">
+                    <h2>Construyamos Juntos</h2>
+                    <p style="color: rgba(255,255,255,0.7); font-size: 1.3rem; margin-bottom: 20px;">
+                        ¿Tienes un proyecto en mente? Hablemos
+                    </p>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-item-icon">📧</div>
+                            <h4>Email</h4>
+                            <p>contacto@jamelz.com</p>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-item-icon">📱</div>
+                            <h4>Teléfono</h4>
+                            <p>+52 (55) 1234-5678</p>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-item-icon">📍</div>
+                            <h4>Ubicación</h4>
+                            <p>Ciudad de México, México</p>
+                        </div>
+                    </div>
+                    <a href="#contacto" class="cta-button">Iniciar Proyecto</a>
+                    <div class="circuit-decoration" style="width: 60%; margin-top: 50px;"></div>
+                    <p style="color: rgba(255,255,255,0.5); margin-top: 30px;">
+                        © 2026 JAMELZ - El arte de construir software con precisión arquitectónica
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Indicador de slides -->
+    <div class="slide-indicator">
+        <div class="indicator-dot active" onclick="document.querySelectorAll('.slide')[0].scrollIntoView({behavior:'smooth'})"></div>
+        <div class="indicator-dot" onclick="document.querySelectorAll('.slide')[1].scrollIntoView({behavior:'smooth'})"></div>
+        <div class="indicator-dot" onclick="document.querySelectorAll('.slide')[2].scrollIntoView({behavior:'smooth'})"></div>
+        <div class="indicator-dot" onclick="document.querySelectorAll('.slide')[3].scrollIntoView({behavior:'smooth'})"></div>
+        <div class="indicator-dot" onclick="document.querySelectorAll('.slide')[4].scrollIntoView({behavior:'smooth'})"></div>
+        <div class="indicator-dot" onclick="document.querySelectorAll('.slide')[5].scrollIntoView({behavior:'smooth'})"></div>
+    </div>
+
+    <script>
+        // Actualizar indicador activo al hacer scroll
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.indicator-dot');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const index = Array.from(slides).indexOf(entry.target);
+                    dots.forEach(dot => dot.classList.remove('active'));
+                    dots[index].classList.add('active');
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        slides.forEach(slide => observer.observe(slide));
+    </script>
+</body>
+</html>
